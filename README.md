@@ -7,6 +7,6 @@ A small Hydrogen Storage Reactor (HSR) to rapidly ‘cycle’ between absorption
 ## PID and Rig Building
 The rig was built with the use of 4 solenoid valves (SV) and a mass flow controller (MFC) to allow a flow of hydrogen from a main gas line to the reactor and from the reactor to an outlet. The basics function and the OpModes are described in details in the attached PID. The additional vacuum pump is connected through a manual three-way valve system (BV1)
 <p align="center">
-  <img src="Supporting_Pics_HyCYCLE/HyCycle_Rig_P&ID_v3-Copy of V6.drawio.png" width="600" title="hover text">
-  <img src="Supporting_Pics_HyCYCLE/IMG_2079.jpg" width="600" alt="accessibility text">
+  <img src="Supporting_Pics_HyCYCLE/HyCycle_Rig_P&ID_v3-Copy of V6.drawio.png" width="800" title="hover text">
+  <img src="Supporting_Pics_HyCYCLE/IMG_2079.jpg" width="800" alt="accessibility text">
 </p>
