@@ -1,8 +1,8 @@
 # HyCYCLE-Project
-This repository contains all the workflow performed in the upgrade of a hydrogen storage reactors testing rig, from the PID, to the rig control and its data analysis according to the specific parameters of the experiments.
+This repository contains all the workflow performed in the upgrade of a Hydrogen Storage Reactors (HSRs) testing rig, from the PID, to the rig control and its data analysis according to the specific parameters of the experiments.
 
 ## Rig and Reactor Purposes
-A small Hydrogen Storage Reactor (HSR) to rapidly ‘cycle’ between absorption and desorption, to study the effect of the cycling condtions on the storage material (metal hydride) and its lifetime. The additional vacuum pump is implemented to further push the activation of certain class of materials.
+A small HSR to rapidly ‘cycle’ between absorption and desorption, to study the effect of the cycling condtions on the storage material (metal hydride) and its lifetime. The additional vacuum pump is implemented to further push the activation of certain class of materials.
 
 ## Hydrogen Storage Reaction with Metal Hydrides
 Hydrogen storage using metal hydrides involves the reversible chemical reaction between hydrogen gas (H₂) and a metal or alloy to form a metal hydride (MHₓ). This process can be represented by the equation:
