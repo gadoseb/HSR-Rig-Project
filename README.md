@@ -155,3 +155,72 @@ This code provides a set of functions primarily designed for handling data from 
 
 
 # Data Analysis Code
+
+## Files information
+### Data Source
+
+| Generic Filename | YYYYMMDDhhmmss_IDENTIFIER.txt |
+| --- | --- |
+| Example | 20231027151332_RRC2.txt |
+| Structure | Timestamp (YYYYMMDDhhmmss)
+IDENTIFIER (RRC2) |
+
+### File Structure
+
+**Introductory Lines**
+
+1. Log Start Identifier: RRC2 log start
+2. Pump Flow Rate: Pump Flow Rate: 3
+3. Test Parameters: Absorption flow rate: 5L/min, Desorption flow rate: 3L/min, Absorption test time: 1500sec, Desorption test time: 3000sec, Total cycles: 2
+
+| Line No. | Information | Example |
+| --- | --- | --- |
+| 1 | Log Start Identifier | RRC2 log start |
+| 2 | - | - |
+| 3 | Pump Flow Rate | Pump Flow Rate: 3 |
+| 4 | Test Parameters | Absorption flow rate: 5L/min, Desorption flow rate: 3L/min, Absorption test time: 1500sec, Desorption test time: 3000sec, Total cycles: 2 |
+
+### Dataset
+
+| Column | Data Type | Description |
+| --- | --- | --- |
+| t | datetime | Timestamp YYYY-MM-DD HH:MM:SS.ffffff |
+| Strain9 | float | Strain gauge reading 9 |
+| Strain10 | float | Strain gauge reading 10 |
+| H2flowrate | float | Hydrogen flow rate |
+| Temp1 | float | Temperature reading 1 |
+| Temp2 | float | Temperature reading 2 |
+| Pressure | float | Pressure reading |
+| H2_transferred_cumulative | float | Cumulative hydrogen transferred |
+
+**Metadata and Section Markers**: Before each set of data, there are markers indicating the start and end of specific testing phases, such as:
+
+- ***Start absorption 1***
+- ***Complete absorption 1***
+- ***Start desorption 1***
+- ***Complete desorption 1***
+- etc.
+
+### File Example
+
+```jsx
+RRC2 log start
+Pump Flow Rate: 3
+
+Absorption flow rate: 5L/min, Desorption flow rate: 3L/min, Absorption test time: 1500sec, Desorption test time: 3000sec, Total cycles: 2
+t, Strain9, Strain10, H2flowrate, Temp1, Temp2, Pressure, H2_transferred_cumulative
+***Start absorption 1***
+2023-10-27 16:28:37.187173,0x0F,0x0F,0.024843749999999998,28.36,55.31,55.47,63.11,0.04,0.0
+2023-10-27 16:28:37.699181,0x0F,0x0F,0.023906249999999997,28.34,55.23,55.38,63.06,0.04,0.0
+...
+***Complete absorption 1***
+***Start desorption 1***
+...
+***Complete desorption 1***
+***Start absorption 2***
+...
+```
+
+### Variations
+
+Typically, the raw files “YYYYMMDDhhmmss_IDENTIFIER.txt” are logging the data of 12 cycles maximum. However, in the case one experiment is run for more than 12 cycles (and often it is a multiple of 12), the data are saved in multiple text files with the same generic filename “YYYYMMDDhhmmss_IDENTIFIER.txt” (where the timestamp is the one of the 1/12 cycles of the experiment) and a file “YYYYMMDDhhmmss_IDENTIFIER-AllLogs.txt”, which contains all the set of data for every cycle.
