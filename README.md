@@ -35,10 +35,41 @@ Three python files are necessary (they can be found in the folder:
 2. ISAK2.py
 3. SmallReactor_Main.py
 
-## bronkhorst.py Documentation
+## 1. bronkhorst.py Documentation
+This code is a Python driver for Bronkhorst flow controllers, which are devices used to control and measure gas flow. The code includes a class Bronkhorst that provides methods to communicate with the device via a serial port, send commands, and read various parameters such as setpoint, flow, and device information.
 
-## ISAK2.py Documentation
+**1. Import Statements:**
 
-## SmallReactor_Main.py Documentation
+- Imports necessary libraries such as time, sys, and serial.
+
+- The from __future__ import print_function ensures compatibility between Python 2 and Python 3 for the print function.
+
+**2. Class Definition (Bronkhorst):**
+
+- Initialization (__init__ method): Initializes the serial connection to the flow controller and verifies the connection.
+
+- Communication Method (comm method): Sends a command to the device and receives the reply.
+
+- Read Setpoint (read_setpoint method): Reads the current setpoint value from the device.
+
+- Read Flow (read_flow method): Reads the actual flow value from the device.
+
+- Set Flow (set_flow method): Sets a desired flow setpoint on the device.
+
+- Read Counter Value (read_counter_value method): Reads the valve counter value (not fully implemented).
+
+- Set Control Mode (set_control_mode method): Sets the control mode to accept RS232 setpoints.
+
+- Read Serial (read_serial method): Reads the serial number of the device.
+
+- Read Unit (read_unit method): Reads the flow unit from the device.
+
+- Read Capacity (read_capacity method): Reads the capacity from the device (the exact meaning is unclear).
+
+If the script is run directly, it creates an instance of the Bronkhorst class and calls various methods to interact with the device.
+
+## 2. ISAK2.py Documentation
+
+## 3. SmallReactor_Main.py Documentation
 
 # Data Analysis Code
