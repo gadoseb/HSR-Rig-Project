@@ -85,7 +85,7 @@ This code is a Python driver for Bronkhorst flow controllers, which are devices 
 
 If the script is run directly, it creates an instance of the Bronkhorst class and calls various methods to interact with the device.
 
-## 2. ISAK2.py Documentation
+## 3. ISAK2.py Documentation
 This code provides a set of functions primarily designed for handling data from CAN (Controller Area Network) frames and Modbus communication, as well as some utility functions for reading and writing configuration files and mapping values. The functions cover decoding and reassembling CAN data, converting between data formats, and interacting with devices over Modbus.
 
 **1. Data Decoding Functions:**
