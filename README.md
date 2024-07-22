@@ -46,15 +46,15 @@ This code is a Python driver for Bronkhorst flow controllers, which are devices 
 
 **2. Class Definition (Bronkhorst):**
 
-- Initialization (__init__ method): Initializes the serial connection to the flow controller and verifies the connection.
+- Initialization (`__init__` method): Initializes the serial connection to the flow controller and verifies the connection.
 
-- Communication Method (comm method): Sends a command to the device and receives the reply.
+- Communication Method (`comm` method): Sends a command to the device and receives the reply.
 
-- Read Setpoint (read_setpoint method): Reads the current setpoint value from the device.
+- Read Setpoint (`read_setpoint` method): Reads the current setpoint value from the device.
 
-- Read Flow (read_flow method): Reads the actual flow value from the device.
+- Read Flow (`read_flow` method): Reads the actual flow value from the device.
 
-- Set Flow (set_flow method): Sets a desired flow setpoint on the device.
+- Set Flow (`set_flow` method): Sets a desired flow setpoint on the device.
 
 - Read Counter Value (read_counter_value method): Reads the valve counter value (not fully implemented).
 
