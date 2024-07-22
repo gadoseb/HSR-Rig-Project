@@ -1,4 +1,4 @@
-# HyCYCLE-Project
+# HSR-Rig-Project
 This repository contains all the workflow performed in the upgrade of a Hydrogen Storage Reactors (HSRs) testing rig, from the PID, to the rig control and its data analysis according to the specific parameters of the experiments.
 
 ## Rig and Reactor Purposes
