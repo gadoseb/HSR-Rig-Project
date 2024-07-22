@@ -224,3 +224,39 @@ t, Strain9, Strain10, H2flowrate, Temp1, Temp2, Pressure, H2_transferred_cumulat
 ### Variations
 
 Typically, the raw files “YYYYMMDDhhmmss_IDENTIFIER.txt” are logging the data of 12 cycles maximum. However, in the case one experiment is run for more than 12 cycles (and often it is a multiple of 12), the data are saved in multiple text files with the same generic filename “YYYYMMDDhhmmss_IDENTIFIER.txt” (where the timestamp is the one of the 1/12 cycles of the experiment) and a file “YYYYMMDDhhmmss_IDENTIFIER-AllLogs.txt”, which contains all the set of data for every cycle.
+
+## Data Analysis 
+
+The code processes and analyzes data from text files located in two specified directories. It performs the following main tasks:
+
+1. **Reading and Combining Data**: Reads text files from two folders, combines the data into two large DataFrames, and renames columns appropriately.
+2. **Cleaning and Filtering Data**: Cleans and filters the combined data, extracting and converting relevant columns into numeric formats.
+3. **Calculating Additional Metrics**: Computes additional metrics such as time since the start of each cycle, time since the start of each experiment, and the total amount of hydrogen (H2) stored.
+4. **Generating Summary Statistics**: Aggregates data to provide summary statistics for various metrics grouped by cycle number and experiment type.
+5. **Plotting Data**: Generates various plots to visualize the hydrogen storage, flow rates, pressure, and strain over time.
+
+### Detailed Steps
+
+1. **Setup and Imports**:
+    - Imports necessary libraries (`os`, `numpy`, `pandas`, `regex`, and `matplotlib`).
+2. **Define File Paths and Keywords**:
+    - Sets paths to directories containing text files (`folderpath_1` and `folderpath_2`).
+    - Defines a keyword to filter files (`filekeyword`).
+3. **Reading and Combining Data**:
+    - Initializes lists to store DataFrames for each folder.
+    - Iterates through files in each directory, reads relevant files into DataFrames, and appends them to the lists.
+    - Combines all individual DataFrames into a single DataFrame for each directory (`combined_df_1` and `combined_df_2`).
+    - Renames columns to meaningful names.
+4. **Data Cleaning and Filtering**:
+    - Extracts relevant strain data from specific columns.
+    - Converts `timestamp` column to datetime format and filters out rows with specific keywords.
+    - Creates new columns for `cycle_number` and `experiment_type`.
+5. **Calculating Metrics**:
+    - **Time since start of each cycle**: Calculates the elapsed time since the start of each cycle.
+    - **Time since start of each experiment**: Computes the cumulative time since the start of the first experiment across all files.
+    - **Hydrogen stored**: Calculates the total amount of hydrogen stored during the experiments.
+6. **Summary Statistics**:
+    - Aggregates data to provide summary statistics for hydrogen stored, strain, and pressure for each cycle and experiment type.
+7. **Data Visualization**:
+    - **Resampling**: Resamples the data to a specified time period.
+    - **Plots**: Generates scatter plots and line plots to visualize hydrogen storage, flow rates, pressure, and strain over time.
