@@ -10,10 +10,15 @@ Hydrogen storage using metal hydrides involves the reversible chemical reaction 
   <img src="Supporting_Pics_HyCYCLE/MH_StorageReaction.png" width="400">
 </p>
 Key parameters influencing this reaction include:
+
 - Temperature: The absorption and desorption of hydrogen by the metal hydride are temperature-dependent. Higher temperatures typically favor desorption, while lower temperatures favor absorption.
+
 - Pressure: Hydrogen storage capacity and kinetics are also influenced by the hydrogen gas pressure. Higher pressures generally enhance hydrogen uptake.
+
 - Thermodynamics: Enthalpy and entropy changes during the reaction determine the equilibrium conditions.
+
 - Kinetics: The reaction rates for hydrogen absorption and desorption depend on the metal's properties and surface characteristics.
+
 - Material Properties: The choice of metal or alloy affects storage capacity, reversibility, and cycling stability. 
 
 ## PID and Rig Building
