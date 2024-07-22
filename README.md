@@ -28,7 +28,17 @@ The rig was built with the use of 4 solenoid valves (SV) and a mass flow control
   <img src="Supporting_Pics_HyCYCLE/IMG_2079.jpg" width="600">
 </p>
 
-## Control Code Logic
-Three python files are necessary
+# Control Code
+Three python files are necessary (they can be found in the folder:
 
-## HyCYCLE Data Analysis
+1. bronkhorst.py
+2. ISAK2.py
+3. SmallReactor_Main.py
+
+## bronkhorst.py Documentation
+
+## ISAK2.py Documentation
+
+## SmallReactor_Main.py Documentation
+
+# Data Analysis Code
