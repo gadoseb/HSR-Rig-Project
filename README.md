@@ -29,13 +29,30 @@ The rig was built with the use of 4 solenoid valves (SV) and a mass flow control
 </p>
 
 # Control Code
-Three python files are necessary (they can be found in the folder:
+Four python files are necessary (they can be found in the folder Rig_Controller):
 
-1. bronkhorst.py
-2. ISAK2.py
-3. SmallReactor_Main.py
+1. DaqCh0to7Bridge.py
+2. bronkhorst.py
+3. ISAK2.py
+4. SmallReactor_Main.py
 
-## 1. bronkhorst.py Documentation
+## 1. DaqCh0to7Bridge.py Documentation
+This Python script is designed to interface with a National Instruments (NI) Data Acquisition (DAQ) system to read strain measurements from multiple sensors and publish the results via MQTT. The script is designed to manage and monitor strain gauges used in a variety of experimental or monitoring setups, making it useful for real-time data acquisition and analysis in engineering and research applications.
+
+**Key Features:**
+- Initialization: Defines initial strain values for different channels on three DAQ modules.
+
+- MQTT Setup: Configures an MQTT client to handle subscription and message publishing for data transfer.
+
+- DAQ Configuration: Sets up multiple DAQ tasks to read strain gauge values from various channels.
+
+- Reading and Publishing Data: Reads strain values from the DAQ channels, publishes them to specific MQTT topics, and prints the results to the console.
+
+- Exception Handling: Includes error handling for DAQ readings and prints exceptions if enabled.
+
+- Cleanup: Registers a function to close all DAQ tasks gracefully upon script termination.
+
+## 2. bronkhorst.py Documentation
 This code is a Python driver for Bronkhorst flow controllers, which are devices used to control and measure gas flow. The code includes a class Bronkhorst that provides methods to communicate with the device via a serial port, send commands, and read various parameters such as setpoint, flow, and device information.
 
 **1. Import Statements:**
@@ -56,20 +73,85 @@ This code is a Python driver for Bronkhorst flow controllers, which are devices 
 
 - Set Flow (`set_flow` method): Sets a desired flow setpoint on the device.
 
-- Read Counter Value (read_counter_value method): Reads the valve counter value (not fully implemented).
+- Read Counter Value (`read_counter_value` method): Reads the valve counter value (not fully implemented).
 
-- Set Control Mode (set_control_mode method): Sets the control mode to accept RS232 setpoints.
+- Set Control Mode (`set_control_mode` method): Sets the control mode to accept RS232 setpoints.
 
-- Read Serial (read_serial method): Reads the serial number of the device.
+- Read Serial (`read_serial` method): Reads the serial number of the device.
 
-- Read Unit (read_unit method): Reads the flow unit from the device.
+- Read Unit (`read_unit` method): Reads the flow unit from the device.
 
-- Read Capacity (read_capacity method): Reads the capacity from the device (the exact meaning is unclear).
+- Read Capacity (`read_capacity` method): Reads the capacity from the device (the exact meaning is unclear).
 
 If the script is run directly, it creates an instance of the Bronkhorst class and calls various methods to interact with the device.
 
 ## 2. ISAK2.py Documentation
+This code provides a set of functions primarily designed for handling data from CAN (Controller Area Network) frames and Modbus communication, as well as some utility functions for reading and writing configuration files and mapping values. The functions cover decoding and reassembling CAN data, converting between data formats, and interacting with devices over Modbus.
 
-## 3. SmallReactor_Main.py Documentation
+**1. Data Decoding Functions:**
+
+- `CanDecode4ByteIntelLittleEnd(InputVal, ScalerVal)`: Decodes a 4-byte integer from Intel little-endian format, scales it by a given value, and returns the scaled output.
+
+- `CanDecode4ByteMotorolaBigEnd(InputVal, ScalerVal)`: Decodes a 4-byte integer from Motorola big-endian format, scales it by a given value, and returns the scaled output.
+
+**2. Hexadecimal Data Handling:**
+
+- `CanRxHexRecompile(InputVal)`: Converts an integer input value to a hexadecimal string.
+
+- `ExtractRawHexDataFromCanFrame(RawHexData, startbytepos, endbytepos)`: Extracts a portion of raw hexadecimal data from a specified start and end byte position.
+
+**3. IEEE Floating Point Conversion:**
+
+- `IeeeFloatManualReassembleFromCan(Byte1, Byte2, Byte3, Byte4)`: Reassembles a float from four bytes in IEEE 754 format.
+
+- `CanTx32BitHexAssemble(InputVal)`: Assembles a 32-bit float into a hexadecimal byte array.
+
+**4. Modbus Communication:**
+
+- `EnapterEl20ModbusRx(ModbusDevice, MbReg, Sz, CovnLsb)`: Reads data from a Modbus device, supports 16-bit and 32-bit data sizes.
+
+- `EnapterEl20ModbusTx(ModbusDevice, MbCoil, WriteVal)`: Writes a value to a Modbus coil.
+
+- `EnapterEl21ModbusRx(ModbusDevice, MbReg, typ)`: Reads data from a Modbus device, supports various data types (bool, uint16, uint32, uint64, float32).
+
+**5. Legacy Configuration File Handling:**
+
+- `LegacyFormatGetLineVal(filehandle, optiontag)`: Reads a value associated with a given option tag from a legacy configuration file.
+- `LegacyFormatSetLineVal(filehandle, optiontag, newval)`: Sets a new value for a given option tag in a legacy configuration file.
+
+**6. Utility Function:**
+
+- `ArduinoLikeMapFunction(ValToMap, InputMin, InputMax, OutputMin, OutputMax)`: Maps a value from one range to another, similar to the map() function in Arduino.
+
+## 4. SmallReactor_Main.py Documentation
+
+**Libraries Used:**
+
+1. **nidaqmx**: This library is used for interacting with National Instruments Data Acquisition (NI-DAQ) devices. It provides functions for configuring and controlling DAQ hardware, as well as reading and writing data.
+2. **serial**: The **`serial`** library is used for serial communication. It allows the Python script to communicate with serial devices, such as microcontrollers, sensors, and other hardware components, via a serial port (e.g., RS-232, RS-485, USB).
+3. **bronkhorst**: This library provides functions for interacting with Bronkhorst mass flow controllers. It likely includes methods for controlling flow rates and reading data from the mass flow controller.
+4. **datetime**: This library is used for handling dates and times in Python. It provides classes and functions for working with dates, times, and time intervals.
+5. **time**: The **`time`** module provides various time-related functions, such as sleeping (pausing execution for a specified duration), measuring time intervals, and getting the current time.
+6. **paho.mqtt.client**: This library implements the MQTT protocol for Python. It allows the Python script to act as an MQTT client, enabling it to publish messages to MQTT brokers and subscribe to topics to receive messages from other clients or devices.
+7. **queue**: The **`queue`** module provides thread-safe data structures for implementing queues. In this code, it's used to store data received via MQTT messages, ensuring safe access from multiple threads.
+8. **pymodbus.client**: This library provides a Modbus TCP client implementation in Python. Modbus is a communication protocol commonly used in industrial automation systems for communicating with PLCs, sensors, and other devices.
+
+**Communication Methods:**
+
+- **Serial Communication**: The code communicates with an Arduino (ArdSerial) using the **`serial`** library. It sends commands and receives data over a serial connection to control the Arduino and retrieve sensor data.
+- **NI-DAQ Communication**: Communication with NI-DAQ devices (e.g., data acquisition boards) is facilitated using the **`nidaqmx`** library. This allows the Python script to configure and control DAQ hardware and read data from analog input channels.
+- **MQTT Communication**: The code uses MQTT (Message Queuing Telemetry Transport) for communication with other devices or systems. It acts as an MQTT client, subscribing to specific topics to receive data and publishing data to other topics.
+- **Modbus TCP Communication**: The **`pymodbus.client`** library enables the Python script to communicate with devices supporting the Modbus TCP protocol over Ethernet. It's used for reading data from Modbus-compatible devices.
+
+**Code Structure:**
+
+1. **Importing Libraries**: The code begins by importing the required Python libraries, including those for communication (serial, MQTT, Modbus), data acquisition (nidaqmx), and datetime handling.
+2. **Initialization**: This section initializes necessary components such as MQTT client, queues for storing data received via MQTT, and configuration settings.
+3. **Function Definitions**: The code defines several functions for specific tasks, such as mapping values, handling MQTT events (connection, message), stopping flow, sampling data, and printing data.
+4. **Main Loop or Execution Logic**: The main execution logic typically involves continuous sampling of data, processing it, and performing actions based on the received data. This may include interacting with hardware (e.g., controlling flow rates), publishing data via MQTT, and logging data to a file or database.
+5. **Data Processing and Communication**: Within the main loop or execution logic, the code samples data from various sources (e.g., DAQ, sensors), processes it (e.g., calculating flow rates, volumes), and communicates with other devices or systems (e.g., publishing data via MQTT, sending commands to Arduino).
+6. **Error Handling**: The code may include error handling mechanisms, such as try-except blocks, to handle exceptions gracefully and ensure the robustness of the system.
+7.  **Strain Limits**: The code will break the main loop if one of the strain sensor hits the upper limit. This allows the abruption of operations avoiding catastrophic failure of the system
+
 
 # Data Analysis Code
